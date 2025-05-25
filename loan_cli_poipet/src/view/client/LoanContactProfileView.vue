@@ -204,7 +204,7 @@ export default {
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
-        this.message = "Failed to load signature. Please try again.";
+        // this.message = "Please try to request loan.";
       } finally {
         this.isLoading = false;
       }

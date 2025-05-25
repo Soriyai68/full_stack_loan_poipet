@@ -48,19 +48,14 @@
 
                 <div v-if="user">
                   <!-- Display loading state -->
-                  <div v-if="isLoading" class="mt-6 pb-6 rounded-b-[--card-border-radius]">
+                  <div
+                    v-if="isLoading"
+                    class="mt-6 pb-6 rounded-b-[--card-border-radius]"
+                  >
                     <div class="space-y-3 font-mono text-xl text-black">
                       <h1>Loading account information...</h1>
                     </div>
                   </div>
-
-                  <!-- Display error state -->
-                  <!-- <div v-else-if="error" class="mt-6 pb-6 rounded-b-[--card-border-radius]">
-                    <div class="space-y-3 font-mono text-xl text-red-500">
-                      <h1>Error loading account information.</h1>
-                      <p>{{ error }}</p>
-                    </div>
-                  </div> -->
 
                   <!-- Display account information if userDoc is available -->
                   <div
@@ -71,7 +66,9 @@
                       v-if="userDoc.accountNumber"
                       class="space-y-3 font-mono text-xl text-black"
                     >
-                      <div v-if="userDoc.status === '0' || userDoc.status === '1'">
+                      <div
+                        v-if="userDoc.status === '0' || userDoc.status === '1'"
+                      >
                         <h1>Welcome!</h1>
                         <h1>Account Number: {{ userDoc?.accountNumber }}</h1>
                         <div class="space-y-2">
@@ -96,7 +93,10 @@
                   </div>
 
                   <!-- Display message if no account information is available -->
-                  <div v-else class="mt-6 pb-6 rounded-b-[--card-border-radius]">
+                  <div
+                    v-else
+                    class="mt-6 pb-6 rounded-b-[--card-border-radius]"
+                  >
                     <div class="space-y-3 font-mono text-xl text-black">
                       <h1>No Account Information Available</h1>
                     </div>
@@ -253,19 +253,16 @@
               </div>
               <div v-if="user">
                 <!-- Display loading state -->
-                <div v-if="isLoading" class="mt-6 pb-6 rounded-b-[--card-border-radius]">
-                  <div class="space-y-3 font-mono text-xs text-black md:text-xl">
+                <div
+                  v-if="isLoading"
+                  class="mt-6 pb-6 rounded-b-[--card-border-radius]"
+                >
+                  <div
+                    class="space-y-3 font-mono text-xs text-black md:text-xl"
+                  >
                     <h1>Loading received loans...</h1>
                   </div>
                 </div>
-
-                <!-- Display error state -->
-                <!-- <div v-else-if="error" class="mt-6 pb-6 rounded-b-[--card-border-radius]">
-                  <div class="space-y-3 font-mono text-xs text-red-500 md:text-xl">
-                    <h1>Error loading received loans.</h1>
-                    <p>{{ error }}</p>
-                  </div>
-                </div> -->
 
                 <!-- Display received loans if userDoc is available -->
                 <div
@@ -287,7 +284,9 @@
 
                 <!-- Display message if no received loans are available -->
                 <div v-else class="mt-6 pb-6 rounded-b-[--card-border-radius]">
-                  <div class="space-y-3 font-mono text-xs text-black md:text-xl">
+                  <div
+                    class="space-y-3 font-mono text-xs text-black md:text-xl"
+                  >
                     <h1>No Received Loans Available</h1>
                   </div>
                 </div>
