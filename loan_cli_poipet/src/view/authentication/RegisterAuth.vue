@@ -178,7 +178,7 @@ const schema = yup.object().shape({
   phone: yup
     .string()
     .required("Phone number is required!")
-    .matches(/^\d{9}$/, "Phone number must be 9 digits!"),
+    .matches(/^\d{9,10}$/, "Phone number must be 9 or 10 digits!"),
   password: yup
     .string()
     .required("Password is required!")

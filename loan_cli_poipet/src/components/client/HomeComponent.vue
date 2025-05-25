@@ -55,12 +55,12 @@
                   </div>
 
                   <!-- Display error state -->
-                  <div v-else-if="error" class="mt-6 pb-6 rounded-b-[--card-border-radius]">
+                  <!-- <div v-else-if="error" class="mt-6 pb-6 rounded-b-[--card-border-radius]">
                     <div class="space-y-3 font-mono text-xl text-red-500">
                       <h1>Error loading account information.</h1>
                       <p>{{ error }}</p>
                     </div>
-                  </div>
+                  </div> -->
 
                   <!-- Display account information if userDoc is available -->
                   <div
@@ -260,12 +260,12 @@
                 </div>
 
                 <!-- Display error state -->
-                <div v-else-if="error" class="mt-6 pb-6 rounded-b-[--card-border-radius]">
+                <!-- <div v-else-if="error" class="mt-6 pb-6 rounded-b-[--card-border-radius]">
                   <div class="space-y-3 font-mono text-xs text-red-500 md:text-xl">
                     <h1>Error loading received loans.</h1>
                     <p>{{ error }}</p>
                   </div>
-                </div>
+                </div> -->
 
                 <!-- Display received loans if userDoc is available -->
                 <div
