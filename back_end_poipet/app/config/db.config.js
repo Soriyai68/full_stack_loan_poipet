@@ -1,5 +1,5 @@
 module.exports = {
-  HOST: "0.0.0.0",
+  HOST: "127.0.0.1",
   PORT: 27017,
-  DB: "loan_poipit_db"
+  DB: "loan_poipit_db",
 };

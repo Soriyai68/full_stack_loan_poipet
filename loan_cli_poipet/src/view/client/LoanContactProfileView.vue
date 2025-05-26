@@ -140,8 +140,8 @@ export default {
       signatureConfirmed: false,
       userDoc: {
         id: null,
-        amount: this.$props.data.amount || 10000,
-        term: this.$props.data.term || 12,
+        // amount: this.$props.data.amount || 10000,
+        // term: this.$props.data.term || 12,
         assigned_image: null,
         status: "pending",
       },

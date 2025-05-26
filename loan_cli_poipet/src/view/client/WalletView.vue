@@ -20,7 +20,7 @@
       </div>
       <div class="text-right">
         <div v-if="isLoading" class="font-bold">Loading...</div>
-        <div v-else-if="error" class="font-bold text-red-500">Error</div>
+        <div v-else-if="error" class="font-bold text-red-500">No Account balance</div>
         <div v-else-if="userLoanStatus" class="flex items-center justify-end">
           <div v-if="userLoanStatus.totalPrincipalAndInterest" class="font-bold">
             ₱ {{ userLoanStatus?.totalPrincipalAndInterest }}
@@ -98,7 +98,7 @@
       </div>
       <div class="text-right text-white">
         <div v-if="isLoading">Loading...</div>
-        <div v-else-if="error" class="text-red-500">Error</div>
+        <div v-else-if="error" class="text-red-500">No Loan Number</div>
         <span v-else-if="userLoanStatus && userLoanStatus.accountNumber">{{ userLoanStatus?.accountNumber }}</span>
         <span v-else>No loan number</span>
       </div>
@@ -126,8 +126,7 @@
       </div>
       <div class="text-right">
         <div v-if="isLoading">Loading order status...</div>
-        <div v-else-if="error" class="text-red-500">{{ error.message }}</div>
-        <div v-else-if="userLoanStatus">
+         <div v-else-if="userLoanStatus">
           <span
             v-if="userLoanStatus.status === '0'"
             class="px-2 py-1 text-xs font-semibold text-white bg-orange-500 rounded-full"
