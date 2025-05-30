@@ -22,6 +22,7 @@ module.exports = (mongoose) => {
       relativeName: { type: String, required: true },
       contact: { type: String, required: true },
       relativePhone: { type: String, required: true },
+      status: { type: String, default: "0" }, // 0: Under Review, 1: Approved, 2: Not Completed
     },
     { timestamps: true }
   );

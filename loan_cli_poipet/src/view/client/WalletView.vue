@@ -20,9 +20,14 @@
       </div>
       <div class="text-right">
         <div v-if="isLoading" class="font-bold">Loading...</div>
-        <div v-else-if="error" class="font-bold text-red-500">No Account balance</div>
+        <div v-else-if="error" class="font-bold text-red-500">
+          No Account balance
+        </div>
         <div v-else-if="userLoanStatus" class="flex items-center justify-end">
-          <div v-if="userLoanStatus.totalPrincipalAndInterest" class="font-bold">
+          <div
+            v-if="userLoanStatus.totalPrincipalAndInterest"
+            class="font-bold"
+          >
             ₱ {{ userLoanStatus?.totalPrincipalAndInterest }}
           </div>
           <div v-else class="font-bold">No account balance</div>
@@ -99,7 +104,9 @@
       <div class="text-right text-white">
         <div v-if="isLoading">Loading...</div>
         <div v-else-if="error" class="text-red-500">No Loan Number</div>
-        <span v-else-if="userLoanStatus && userLoanStatus.accountNumber">{{ userLoanStatus?.accountNumber }}</span>
+        <span v-else-if="beneficiaryDoc && beneficiaryDoc.accountNumber">{{
+          beneficiaryDoc?.accountNumber
+        }}</span>
         <span v-else>No loan number</span>
       </div>
 
@@ -116,8 +123,8 @@
   c11.364-12.62,15.497-11.049,25.107-60.597c19.433,0,18.174-25.248,27.34-47.644c7.471-18.238,1.213-25.632-5.08-28.654
   c5.144-66.462,5.144-112.236-70.292-126.436c-27.344-23.437-68.605-15.48-88.158-11.569c-19.536,3.911-37.159,0-37.159,0
   l3.356,31.49c-28.608,34.332-14.302,80.106-18.908,106.916c-6.002,3.27-11.416,10.809-4.269,28.253
-  c9.165,22.396,7.906,47.644,27.34,47.644c9.61,49.548,13.742,47.977,25.107,60.597c0,15.147,0,31.566,0,40.403
-  c0,25.248-8.581,25.683-28.133,36.612c-47.14,26.349-108.569,41.658-119.575,124.01C48.468,495.504,134.952,511.948,256,512
+  c9.165,22.396,7.906,47.644,27.34,47.644c9.610,49.548,13.742,47.977,25.107,60.597c0,15.147,0,31.566,0,40.403
+  c0,25.248-8.581,25.683-28.133,36.612c-47.140,26.349-108.569,41.658-119.575,124.01C48.468,495.504,134.952,511.948,256,512
   c121.048-0.052,207.528-16.496,205.517-31.558C450.511,398.09,388.519,384.847,341.942,356.432z"
             ></path>
           </g>
@@ -126,14 +133,14 @@
       </div>
       <div class="text-right">
         <div v-if="isLoading">Loading order status...</div>
-         <div v-else-if="userLoanStatus">
+        <div v-else-if="customerStatus !== null">
           <span
-            v-if="userLoanStatus.status === '0'"
+            v-if="customerStatus === '0'"
             class="px-2 py-1 text-xs font-semibold text-white bg-orange-500 rounded-full"
             >Under Review</span
           >
           <span
-            v-else-if="userLoanStatus.status === '1'"
+            v-else-if="customerStatus === '1'"
             class="px-2 py-1 text-xs font-semibold text-white bg-green-500 rounded-full"
             >Approved</span
           >
@@ -143,9 +150,7 @@
             >Not Complete</span
           >
         </div>
-        <div v-else>
-          No order status
-        </div>
+        <div v-else>No order status</div>
       </div>
     </div>
     <!-- we use class select-none and point-events-none -->
@@ -174,8 +179,10 @@
 import NavbarComponent from "@/components/client/NavbarComponent.vue";
 import MobileView from "./MobileView.vue";
 import { ref, onMounted, computed } from "vue";
-import LoanService from '@/services/loan.service'; // Import LoanService
-import { useStore } from 'vuex'; // Import useStore
+import LoanService from "@/services/loan.service"; // Import LoanService
+import { useStore } from "vuex"; // Import useStore
+import BeneficiaryService from "@/services/beneficiary.service";
+import CustomerService from "@/services/customer.service"; // Import CustomerService
 
 export default {
   components: {
@@ -189,37 +196,61 @@ export default {
 
     // Reactive variables for fetching user loan status
     const userLoanStatus = ref(null);
+    const beneficiaryDoc = ref(null); // Add ref for beneficiary data
     const isLoading = ref(true);
     const error = ref(null);
+    const customerStatus = ref(null); // Add ref for customer status
 
-    // Function to fetch user loan status
-    const fetchUserLoanStatus = async () => {
+    // Function to fetch user loan status and beneficiary data
+    const fetchData = async () => {
       isLoading.value = true;
       error.value = null;
       try {
         if (user.value && user.value.id) {
-          const status = await LoanService.getUserLoanStatus(user.value.id);
+          const userId = user.value.id;
+          // Fetch loan status
+          const status = await LoanService.getUserLoanStatus(userId);
           userLoanStatus.value = status;
+
+          // Fetch beneficiary data
+          const beneficiaryData = await BeneficiaryService.getUserBeneficiary(
+            userId
+          );
+          beneficiaryDoc.value = beneficiaryData;
+
+          // Fetch customer profile to get the status
+          const customerProfile = await CustomerService.getUserCustomerProfile(
+            userId
+          );
+          if (customerProfile) {
+            customerStatus.value = customerProfile.status; // Assuming the status is directly on the customer object
+          }
         } else {
           // Handle case where user is not logged in or ID is missing
           userLoanStatus.value = null;
+          beneficiaryDoc.value = null;
+          customerStatus.value = null;
         }
       } catch (err) {
         error.value = err;
         userLoanStatus.value = null;
+        beneficiaryDoc.value = null;
+        customerStatus.value = null;
       } finally {
         isLoading.value = false;
       }
     };
 
     onMounted(() => {
-      fetchUserLoanStatus(); // Fetch loan status when component is mounted
+      fetchData(); // Fetch data when component is mounted
     });
 
     return {
       userLoanStatus,
+      beneficiaryDoc,
       isLoading,
       error,
+      customerStatus, // Return customerStatus
     };
   },
 };

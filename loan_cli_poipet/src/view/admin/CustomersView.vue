@@ -1,4 +1,3 @@
-```vue
 <template>
   <section class="container px-4 mx-auto">
     <div class="sm:flex sm:items-center sm:justify-between">
@@ -151,63 +150,33 @@
                   >
                     {{ customer?.name }}
                   </td>
-                  <td
-                    class="px-4 py-4 text-sm font-medium whitespace-nowrap"
-                  >
+                  <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                     {{ customer?.idNumber }}
                   </td>
-                  <td
-                    class="px-4 py-4 text-sm font-medium whitespace-nowrap"
-                  >
+                  <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                     {{ customer?.gender }}
                   </td>
-                  <td
-                    class="px-4 py-4 text-sm font-medium whitespace-nowrap"
-                  >
+                  <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                     {{ customer?.dob }}
                   </td>
-                  <td
-                    class="px-4 py-4 text-sm font-medium whitespace-nowrap"
-                  >
+                  <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                     <div>
-                      <img
-                        :src="customer?.front_image"
-                        class="w-12"
-                        alt=""
-                      />
+                      <img :src="customer?.front_image" class="w-12" alt="" />
                     </div>
                   </td>
-                  <td
-                    class="px-4 py-4 text-sm font-medium whitespace-nowrap"
-                  >
-                    <img
-                      :src="customer?.back_image"
-                      class="w-12"
-                      alt=""
-                    />
+                  <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                    <img :src="customer?.back_image" class="w-12" alt="" />
                   </td>
-                  <td
-                    class="px-4 py-4 text-sm font-medium whitespace-nowrap"
-                  >
-                    <img
-                      :src="customer?.selfie_image"
-                      class="w-12"
-                      alt=""
-                    />
+                  <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                    <img :src="customer?.selfie_image" class="w-12" alt="" />
                   </td>
-                  <td
-                    class="px-4 py-4 text-sm font-medium whitespace-nowrap"
-                  >
+                  <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                     {{ customer?.bankName }}
                   </td>
-                  <td
-                    class="px-4 py-4 text-sm font-medium whitespace-nowrap"
-                  >
+                  <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                     {{ customer?.accountNumber }}
                   </td>
-                  <td
-                    class="px-4 py-4 text-sm font-medium whitespace-nowrap"
-                  >
+                  <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                     <div
                       v-if="customer.status === '0'"
                       class="text-xs text-center text-white bg-orange-500 rounded-full"
@@ -227,9 +196,7 @@
                       <p>Not Completed</p>
                     </div>
                   </td>
-                  <td
-                    class="px-4 py-4 text-sm font-medium whitespace-nowrap"
-                  >
+                  <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                     <div
                       class="text-xs text-center text-white rounded-full bg-black/90"
                     >
@@ -240,7 +207,9 @@
                     class="flex justify-end gap-2 px-4 py-4 text-sm font-medium whitespace-nowrap"
                   >
                     <div
-                      v-if="customer?.status === '0' || customer?.status === '1'"
+                      v-if="
+                        customer?.status === '0' || customer?.status === '1'
+                      "
                       @click="handleCurrentUpdate(customer)"
                     >
                       <svg
@@ -261,7 +230,10 @@
                     </div>
                     <div>
                       <RouterLink
-                        :to="{ name: 'viewCustomer', params: { id: customer.id } }"
+                        :to="{
+                          name: 'viewCustomer',
+                          params: { id: customer.id },
+                        }"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -284,17 +256,7 @@
                         </svg>
                       </RouterLink>
                     </div>
-                    <div
-                      @click="
-                        handleDelete(
-                          customer?.id,
-                          customer?.front_image,
-                          customer?.back_image,
-                          customer?.selfie_image,
-                          customer?.assigned_image
-                        )
-                      "
-                    >
+                    <div @click="handleDelete(customer?.id)">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
@@ -308,12 +270,8 @@
                         class="cursor-pointer lucide lucide-trash2-icon lucide-trash-2 hover:text-red-500"
                       >
                         <path d="M3 6h18" />
-                        <path
-                          d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"
-                        />
-                        <path
-                          d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"
-                        />
+                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
                         <line x1="10" x2="10" y1="11" y2="17" />
                         <line x1="14" x2="14" y1="11" y2="17" />
                       </svg>
@@ -361,7 +319,7 @@
           :disabled="currentPage === totalPages"
           class="p-2.5 border bg-white inline-flex items-center gap-x-2 text-sm rounded-full text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
         >
-          <span>»</span>
+          <span>«</span>
           <span>Next</span>
         </button>
       </nav>
@@ -377,58 +335,97 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, onMounted } from "vue";
 import { RouterLink } from "vue-router";
+import CustomerService from "@/services/customer.service";
+import UploadService from "@/services/UploadFiles.service"; // Import UploadService
+import BeneficiaryService from "@/services/beneficiary.service"; // Import BeneficiaryService
 
 // Mock customers data (simulating Firebase's getCollection('customers'))
-const customers = ref([
-  {
-    id: "cust1",
-    name: "John Doe",
-    idNumber: "123456789",
-    gender: "Male",
-    dob: "1990-01-01",
-    front_image: "https://via.placeholder.com/150?text=Front",
-    back_image: "https://via.placeholder.com/150?text=Back",
-    selfie_image: "https://via.placeholder.com/150?text=Selfie",
-    bankName: "Bank A",
-    accountNumber: "987654321",
-    status: "0",
-    ipAddress: "192.168.1.1",
-    assigned_image: "https://via.placeholder.com/150?text=Assigned",
-  },
-  {
-    id: "cust2",
-    name: "Jane Smith",
-    idNumber: "987654321",
-    gender: "Female",
-    dob: "1985-05-15",
-    front_image: "https://via.placeholder.com/150?text=Front",
-    back_image: "https://via.placeholder.com/150?text=Back",
-    selfie_image: "https://via.placeholder.com/150?text=Selfie",
-    bankName: "Bank B",
-    accountNumber: "123456789",
-    status: "1",
-    ipAddress: "192.168.1.2",
-    assigned_image: "https://via.placeholder.com/150?text=Assigned",
-  },
-  {
-    id: "cust3",
-    name: "Alex Johnson",
-    idNumber: "456789123",
-    gender: "Other",
-    dob: "1995-10-20",
-    front_image: "https://via.placeholder.com/150?text=Front",
-    back_image: "https://via.placeholder.com/150?text=Back",
-    selfie_image: "https://via.placeholder.com/150?text=Selfie",
-    bankName: "Bank C",
-    accountNumber: "456789123",
-    status: "2",
-    ipAddress: "192.168.1.3",
-    assigned_image: "https://via.placeholder.com/150?text=Assigned",
-  },
-  // Add more mock customers as needed
-]);
+const customers = ref([]);
+const isLoading = ref(true);
+
+// Fetch customers from the backend
+const fetchCustomers = async () => {
+  isLoading.value = true;
+  try {
+    const response = await CustomerService.getAll();
+    const fetchedCustomers = response.data; // Store fetched customers temporarily
+
+    // Fetch images and beneficiary info for each customer
+    const customersWithDetails = await Promise.all(
+      fetchedCustomers.map(async (customer) => {
+        let front_image = null;
+        let back_image = null;
+        let selfie_image = null;
+        let bankName = null;
+        let accountNumber = null;
+
+        try {
+          const filesResponse = await UploadService.getFiles(customer.userId);
+          const files = filesResponse.data || [];
+
+          files.forEach((file) => {
+            if (file.metadata && file.metadata.documentType === "front_image") {
+              front_image = file.url;
+            } else if (
+              file.metadata &&
+              file.metadata.documentType === "back_image"
+            ) {
+              back_image = file.url;
+            } else if (
+              file.metadata &&
+              file.metadata.documentType === "selfie_image"
+            ) {
+              selfie_image = file.url;
+            }
+          });
+        } catch (imageError) {
+          console.error(
+            `Error fetching images for customer ${customer.userId}:`,
+            imageError
+          );
+        }
+
+        try {
+          const beneficiary = await BeneficiaryService.getUserBeneficiary(
+            customer.userId
+          );
+          if (beneficiary) {
+            bankName = beneficiary.bankName;
+            accountNumber = beneficiary.accountNumber;
+          }
+        } catch (beneficiaryError) {
+          console.error(
+            `Error fetching beneficiary for customer ${customer.userId}:`,
+            beneficiaryError
+          );
+        }
+
+        return {
+          ...customer,
+          front_image,
+          back_image,
+          selfie_image,
+          bankName,
+          accountNumber,
+        };
+      })
+    );
+
+    customers.value = customersWithDetails;
+    updatePagination();
+  } catch (error) {
+    console.error("Error fetching customers:", error);
+  } finally {
+    isLoading.value = false;
+  }
+};
+
+// Initial fetch on component mount
+onMounted(() => {
+  fetchCustomers();
+});
 
 // Pagination and search state
 const searchText = ref("");
@@ -441,8 +438,11 @@ const pageRange = ref([]);
 const filteredData = computed(() => {
   if (!searchText.value.trim()) return customers.value;
   const query = searchText.value.trim().toLowerCase();
-  return customers.value.filter((customer) =>
-    customer.name.toLowerCase().includes(query)
+  return customers.value.filter(
+    (customer) =>
+      customer.name.toLowerCase().includes(query) ||
+      customer.idNumber.toLowerCase().includes(query) ||
+      customer.ipAddress.toLowerCase().includes(query)
   );
 });
 
@@ -456,10 +456,7 @@ const paginatedData = computed(() => {
 // Update pagination
 const updatePagination = () => {
   totalPages.value = Math.ceil(filteredData.value.length / itemsPerPage.value);
-  pageRange.value = Array.from(
-    { length: totalPages.value },
-    (_, i) => i + 1
-  );
+  pageRange.value = Array.from({ length: totalPages.value }, (_, i) => i + 1);
 };
 
 // Initial pagination setup
@@ -492,45 +489,39 @@ const goToPage = (page) => {
 const currentComponents = ref("");
 const statusData = ref(null);
 
-const handleCurrentUpdate = (item) => {
+const handleCurrentUpdate = async (item) => {
   console.log("Update customer status:", item);
-  // Placeholder: Simulate opening modal
-  statusData.value = item;
-  currentComponents.value = "UpdateCustomerModalPlaceholder";
-};
-
-const handleDelete = (id, fimage, bimage, simage, assign_image) => {
-  if (window.confirm("Are you sure you want to delete?")) {
-    console.log("Deleting customer:", id, "Images:", [
-      fimage,
-      bimage,
-      simage,
-      assign_image,
-    ]);
-    // Simulate deletion by removing from mock data
-    customers.value = customers.value.filter((customer) => customer.id !== id);
-    updatePagination();
-    alert("Delete Successful");
+  const newStatus = item.status === "0" ? "1" : "0"; // Toggle status for example
+  try {
+    await CustomerService.updateStatus(item.id, { status: newStatus });
+    // Update the local customer list after successful update
+    const index = customers.value.findIndex((c) => c.id === item.id);
+    if (index !== -1) {
+      customers.value[index].status = newStatus;
+    }
+    alert("Customer status updated successfully!");
+  } catch (error) {
+    console.error("Error updating customer status:", error);
+    alert("Failed to update customer status.");
   }
 };
 
-// Placeholder component for UpdateCustomerModal
-// const UpdateCustomerModalPlaceholder = {
-//   props: ["statusData"],
-//   emits: ["close"],
-//   template: `
-//     <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-//       <div class="bg-white p-6 rounded-lg">
-//         <h2 class="text-lg font-bold">Update Customer Status</h2>
-//         <p>Customer: {{ statusData?.name }}</p>
-//         <p>Status: {{ statusData?.status }}</p>
-//         <button @click="$emit('close')" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
-//           Close
-//         </button>
-//       </div>
-//     </div>
-//   `,
-// };
+const handleDelete = async (id) => {
+  if (confirm("Are you sure you want to delete this customer?")) {
+    try {
+      await CustomerService.delete(id);
+      // Optionally, delete associated images from storage if needed
+      // await UploadService.deleteFile(fimage);
+      // await UploadService.deleteFile(bimage);
+      // await UploadService.deleteFile(simage);
+      fetchCustomers(); // Refresh the list after deletion
+      alert("Customer deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting customer:", error);
+      alert("Failed to delete customer.");
+    }
+  }
+};
 </script>
 
 <style scoped>

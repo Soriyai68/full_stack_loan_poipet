@@ -25,6 +25,10 @@ class CustomerService {
     return http.put(`/customers/${id}`, data, { headers: authHeader() });
   }
 
+  updateStatus(id, data) {
+    return http.put(`/customers/status/${id}`, data, { headers: authHeader() });
+  }
+
   delete(id) {
     return http.delete(`/customers/${id}`, { headers: authHeader() });
   }

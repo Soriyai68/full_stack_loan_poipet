@@ -36,6 +36,7 @@ exports.create = (req, res) => {
     relativeName: req.body.relativeName,
     contact: req.body.contact,
     relativePhone: req.body.relativePhone,
+    status: req.body.status || "0", // Add status field, default to '0'
   });
 
   // Save Customer in the database
@@ -111,6 +112,40 @@ exports.update = (req, res) => {
     .catch((err) => {
       res.status(500).send({
         message: "Error updating Customer with id=" + id,
+      });
+    });
+};
+
+// Update customer status
+exports.updateStatus = (req, res) => {
+  const id = req.params.id;
+  const { status } = req.body;
+
+  if (status === undefined) {
+    return res.status(400).send({ message: "Status field is required!" });
+  }
+
+  Customer.findByIdAndUpdate(
+    id,
+    { status: status },
+    { useFindAndModify: false, new: true }
+  )
+    .then((data) => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot update status for Customer with id=${id}. Maybe Customer was not found!`,
+        });
+      } else {
+        res.send({
+          message: "Customer status updated successfully.",
+          data: data,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          "Error updating customer status with id=" + id + ": " + err.message,
       });
     });
 };

@@ -432,40 +432,13 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref, watch } from "vue";
+more
+s <script setup>
+import { ref, watch, onMounted } from "vue";
 import { useRoute, RouterLink } from "vue-router";
-
-// Mock customer data (simulating Firebase's getCollectionQueryTerm)
-const mockCustomers = [
-  {
-    id: "cust1",
-    name: "John Doe",
-    idNumber: "123456789",
-    gender: "Male",
-    job: "Engineer",
-    income: "50000",
-    loanPurpose: "Home Renovation",
-    address: "123 Main St, City",
-    relativeName: "Jane Doe",
-    contact: "john@example.com",
-    relativePhone: "555-0123",
-    front_image: "https://via.placeholder.com/150?text=Front",
-    back_image: "https://via.placeholder.com/150?text=Back",
-    selfie_image: "https://via.placeholder.com/150?text=Selfie",
-    bankName: "Bank A",
-    accountNumber: "987654321",
-    assigned_image: "https://via.placeholder.com/150?text=Signature",
-    amount: "100000",
-    term: "12",
-    monthlyPayment: "9000",
-    totalInterest: "8000",
-    totalPrincipalAndInterest: "108000",
-    status: "1",
-  },
-  // Add more mock customers as needed
-];
+import CustomerService from "@/services/customer.service";
+import UploadService from "@/services/UploadFiles.service";
+import BeneficiaryService from "@/services/beneficiary.service";
 
 // Reactive userDoc to hold the current customer
 const userDoc = ref([]);
@@ -473,18 +446,104 @@ const userDoc = ref([]);
 // Route handling
 const route = useRoute();
 
-// Watch for route params.id changes
+// Fetch customer details
+const fetchCustomerDetails = async (customerId) => {
+  try {
+    const customerResponse = await CustomerService.get(customerId);
+    const customer = customerResponse.data;
+
+    if (!customer) {
+      console.error("Customer not found");
+      userDoc.value = [];
+      return;
+    }
+
+    let front_image = null;
+    let back_image = null;
+    let selfie_image = null;
+    let bankName = null;
+    let accountNumber = null;
+    let assigned_image = null;
+
+    try {
+      const filesResponse = await UploadService.getFiles(customer.userId);
+      const files = filesResponse.data || [];
+
+      files.forEach((file) => {
+        if (file.metadata && file.metadata.documentType === "front_image") {
+          front_image = file.url;
+        } else if (
+          file.metadata &&
+          file.metadata.documentType === "back_image"
+        ) {
+          back_image = file.url;
+        } else if (
+          file.metadata &&
+          file.metadata.documentType === "selfie_image"
+        ) {
+          selfie_image = file.url;
+        } else if (
+          file.metadata &&
+          file.metadata.documentType === "assigned_image"
+        ) {
+          assigned_image = file.url;
+        }
+      });
+    } catch (imageError) {
+      console.error(
+        `Error fetching images for customer ${customer.userId}:`,
+        imageError
+      );
+    }
+
+    try {
+      const beneficiary = await BeneficiaryService.getUserBeneficiary(
+        customer.userId
+      );
+      if (beneficiary) {
+        bankName = beneficiary.bankName;
+        accountNumber = beneficiary.accountNumber;
+      }
+    } catch (beneficiaryError) {
+      console.error(
+        `Error fetching beneficiary for customer ${customer.userId}:`,
+        beneficiaryError
+      );
+    }
+
+    userDoc.value = [{
+      ...customer,
+      front_image,
+      back_image,
+      selfie_image,
+      bankName,
+      accountNumber,
+      assigned_image,
+    }];
+
+  } catch (error) {
+    console.error("Error fetching customer details:", error);
+    userDoc.value = [];
+  }
+};
+
+// Watch for route params.id changes and fetch data
 watch(
   () => route.params.id,
   (newId) => {
     if (newId) {
-      // Simulate fetching customer by id
-      const customer = mockCustomers.find((c) => c.id === newId);
-      userDoc.value = customer ? [customer] : [];
+      fetchCustomerDetails(newId);
     }
   },
   { immediate: true }
 );
+
+// Initial fetch on component mount if id is already present
+onMounted(() => {
+  if (route.params.id) {
+    fetchCustomerDetails(route.params.id);
+  }
+});
 </script>
 
 <style scoped>

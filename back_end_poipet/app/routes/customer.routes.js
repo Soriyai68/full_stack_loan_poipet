@@ -1,6 +1,6 @@
 module.exports = app => {
   const customers = require("../controllers/customer.controller.js");
-  const { authJwt } = require("../middlewares"); // Assuming you want to protect these routes
+  const { authJwt } = require("../middlewares");
 
   var router = require("express").Router();
 
@@ -15,6 +15,9 @@ module.exports = app => {
 
   // Update a Customer with id
   router.put("/:id", [authJwt.verifyToken], customers.update);
+
+  // Update Customer Status with id
+  router.put("/status/:id", [authJwt.verifyToken], customers.updateStatus);
 
   // Delete a Customer with id
   router.delete("/:id", [authJwt.verifyToken], customers.delete);
