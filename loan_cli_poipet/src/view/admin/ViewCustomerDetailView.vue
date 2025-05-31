@@ -5,9 +5,7 @@
     class="m-auto space-y-8 divide-y divide-gray-200"
   >
     <div class="space-y-8 divide-y divide-gray-200">
-      <div
-        class="p-5 bg-white border-t-2 rounded-md border-t-blue-500"
-      >
+      <div class="p-5 bg-white border-t-2 rounded-md border-t-blue-500">
         <div class="flex items-center gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -26,15 +24,11 @@
             <circle cx="18" cy="18" r="3" />
             <path d="m22 22-1.9-1.9" />
           </svg>
-          <h3 class="text-2xl font-medium leading-6 text-gray-900">
-            Profile
-          </h3>
+          <h3 class="text-2xl font-medium leading-6 text-gray-900">Profile</h3>
         </div>
       </div>
 
-      <div
-        class="p-5 pt-8 border-t-2 rounded-md bg-gray-50"
-      >
+      <div class="p-5 pt-8 border-t-2 rounded-md bg-gray-50">
         <div>
           <h3 class="text-lg font-medium leading-6 text-gray-900">
             Personal Information
@@ -43,13 +37,9 @@
             Use a permanent address where you can receive mail.
           </p>
         </div>
-        <div
-          class="grid grid-cols-1 mt-6 gap-y-6 gap-x-4 sm:grid-cols-6"
-        >
+        <div class="grid grid-cols-1 mt-6 gap-y-6 gap-x-4 sm:grid-cols-6">
           <div class="sm:col-span-2">
-            <label
-              class="block text-sm font-medium text-gray-700"
-            >
+            <label class="block text-sm font-medium text-gray-700">
               Actual Name
             </label>
             <div class="mt-1">
@@ -63,10 +53,7 @@
           </div>
 
           <div class="sm:col-span-2">
-            <label
-              for="region"
-              class="block text-sm font-medium text-gray-700"
-            >
+            <label for="region" class="block text-sm font-medium text-gray-700">
               Indentification Card No
             </label>
             <div class="mt-1">
@@ -97,10 +84,7 @@
           </div>
 
           <div class="sm:col-span-2">
-            <label
-              for="city"
-              class="block text-sm font-medium text-gray-700"
-            >
+            <label for="city" class="block text-sm font-medium text-gray-700">
               Current Job
             </label>
             <div class="mt-1">
@@ -114,10 +98,7 @@
           </div>
 
           <div class="sm:col-span-2">
-            <label
-              for="region"
-              class="block text-sm font-medium text-gray-700"
-            >
+            <label for="region" class="block text-sm font-medium text-gray-700">
               Stable Income
             </label>
             <div class="mt-1">
@@ -148,10 +129,7 @@
           </div>
 
           <div class="sm:col-span-2">
-            <label
-              for="region"
-              class="block text-sm font-medium text-gray-700"
-            >
+            <label for="region" class="block text-sm font-medium text-gray-700">
               Current Address
             </label>
             <div class="mt-1">
@@ -182,10 +160,7 @@
           </div>
 
           <div class="sm:col-span-2">
-            <label
-              for="region"
-              class="block text-sm font-medium text-gray-700"
-            >
+            <label for="region" class="block text-sm font-medium text-gray-700">
               Contact
             </label>
             <div class="mt-1">
@@ -218,9 +193,7 @@
       </div>
 
       <!-- Indentification -->
-      <div
-        class="p-5 pt-8 border-t-2 rounded-md bg-gray-50"
-      >
+      <div class="p-5 pt-8 border-t-2 rounded-md bg-gray-50">
         <div>
           <h3 class="text-lg font-medium leading-6 text-gray-900">
             KYC Indentification
@@ -286,9 +259,7 @@
       </div>
 
       <!-- Baneficicary Bank information -->
-      <div
-        class="p-5 pt-8 border-t-2 rounded-md bg-gray-50"
-      >
+      <div class="p-5 pt-8 border-t-2 rounded-md bg-gray-50">
         <div>
           <h3 class="text-lg font-medium leading-6 text-gray-900">
             Baneficicary Bank Information
@@ -337,13 +308,9 @@
       </div>
 
       <!-- Signature -->
-      <div
-        class="p-5 pt-8 border-t-2 rounded-md bg-gray-50"
-      >
+      <div class="p-5 pt-8 border-t-2 rounded-md bg-gray-50">
         <div>
-          <h3 class="text-lg font-medium leading-6 text-gray-900">
-            Signature
-          </h3>
+          <h3 class="text-lg font-medium leading-6 text-gray-900">Signature</h3>
         </div>
         <div class="mt-6">
           <fieldset class="mt-6">
@@ -366,44 +333,57 @@
       </div>
 
       <!-- Loan Details -->
-      <div
-        class="p-5 pt-8 border-t-2 rounded-md bg-gray-50"
-      >
+      <div class="p-5 pt-8 border-t-2 rounded-md bg-gray-50">
         <div>
           <h3 class="text-2xl font-medium leading-6 text-gray-900">
             Loan Details
           </h3>
         </div>
         <div
+          v-if="loanDetails"
           class="p-4 mt-6 text-white bg-blue-600 rounded-md shadow-xl"
         >
           <div class="space-y-3">
             <h1 class="flex justify-between font-mono text-xl">
-              Loan Amount: <span><b>₱ {{ usDoc?.amount }}</b></span>
+              Loan Amount:
+              <span
+                ><b>₱ {{ loanDetails?.amount }}</b></span
+              >
             </h1>
             <h1 class="flex justify-between font-mono text-xl">
-              Loan Tearm: <span><b>{{ usDoc?.term }} Months</b></span>
+              Loan Tearm:
+              <span
+                ><b>{{ loanDetails?.term }} Months</b></span
+              >
             </h1>
             <h1 class="flex justify-between font-mono text-xl">
-              Montly Payments: <span><b>₱ {{ usDoc?.monthlyPayment }}</b></span>
+              Montly Payments:
+              <span
+                ><b>₱ {{ loanDetails?.monthlyPayment }}</b></span
+              >
             </h1>
             <h1 class="flex justify-between font-mono text-xl">
-              Interest: <span><b>₱ {{ usDoc?.totalInterest }}</b></span>
+              Interest:
+              <span
+                ><b>₱ {{ loanDetails?.totalInterest }}</b></span
+              >
             </h1>
             <h1 class="flex justify-between font-mono text-xl">
               Loan Total & Interest:
-              <span><b>₱ {{ usDoc?.totalPrincipalAndInterest }}</b></span>
+              <span
+                ><b>₱ {{ loanDetails?.totalPrincipalAndInterest }}</b></span
+              >
             </h1>
             <h1 class="flex justify-between font-mono text-xl">
               Status:
               <span
-                v-if="usDoc.status === '0'"
+                v-if="customerStatus === '0'"
                 class="p-2 font-mono text-sm bg-orange-500 rounded-full"
               >
                 <p>Under Review</p>
               </span>
               <span
-                v-else-if="usDoc.status === '1'"
+                v-else-if="customerStatus === '1'"
                 class="p-2 font-mono text-sm bg-green-500 rounded-full"
               >
                 <p>Approved</p>
@@ -416,6 +396,12 @@
               </span>
             </h1>
           </div>
+        </div>
+        <div
+          v-else
+          class="p-4 mt-6 text-gray-700 bg-gray-200 rounded-md shadow-xl"
+        >
+          <p>No loan details available for this customer.</p>
         </div>
       </div>
     </div>
@@ -432,16 +418,18 @@
     </div>
   </div>
 </template>
-more
-s <script setup>
+<script setup>
 import { ref, watch, onMounted } from "vue";
 import { useRoute, RouterLink } from "vue-router";
 import CustomerService from "@/services/customer.service";
 import UploadService from "@/services/UploadFiles.service";
 import BeneficiaryService from "@/services/beneficiary.service";
+import LoanService from "@/services/loan.service";
 
 // Reactive userDoc to hold the current customer
 const userDoc = ref([]);
+const loanDetails = ref(null);
+const customerStatus = ref(null); // Added customerStatus ref
 
 // Route handling
 const route = useRoute();
@@ -455,8 +443,11 @@ const fetchCustomerDetails = async (customerId) => {
     if (!customer) {
       console.error("Customer not found");
       userDoc.value = [];
+      customerStatus.value = null; // Reset customerStatus
       return;
     }
+
+    customerStatus.value = customer.status; // Set customerStatus from fetched customer data
 
     let front_image = null;
     let back_image = null;
@@ -484,7 +475,7 @@ const fetchCustomerDetails = async (customerId) => {
           selfie_image = file.url;
         } else if (
           file.metadata &&
-          file.metadata.documentType === "assigned_image"
+          file.metadata.documentType === "signature" // Changed from "assigned_image" to "signature"
         ) {
           assigned_image = file.url;
         }
@@ -511,19 +502,36 @@ const fetchCustomerDetails = async (customerId) => {
       );
     }
 
-    userDoc.value = [{
-      ...customer,
-      front_image,
-      back_image,
-      selfie_image,
-      bankName,
-      accountNumber,
-      assigned_image,
-    }];
+    try {
+      const loan = await LoanService.getUserLoanStatus(customer.userId);
+      if (loan) {
+        loanDetails.value = loan;
+      } else {
+        loanDetails.value = null;
+      }
+    } catch (loanError) {
+      console.error(
+        `Error fetching loan details for customer ${customer.userId}:`,
+        loanError
+      );
+      loanDetails.value = null;
+    }
 
+    userDoc.value = [
+      {
+        ...customer,
+        front_image,
+        back_image,
+        selfie_image,
+        bankName,
+        accountNumber,
+        assigned_image,
+      },
+    ];
   } catch (error) {
     console.error("Error fetching customer details:", error);
     userDoc.value = [];
+    customerStatus.value = null; // Reset customerStatus on error
   }
 };
 
@@ -544,8 +552,28 @@ onMounted(() => {
     fetchCustomerDetails(route.params.id);
   }
 });
-</script>
 
+// Remove this method:
+// const handleUpdateStatus = async () => {
+//   if (!userDoc.value || userDoc.value.length === 0 || !userDoc.value[0].id) {
+//     alert("Customer data not available.");
+//     return;
+//   }
+//
+//   const customerId = userDoc.value[0].id; // Get the customer ID from the first element of userDoc
+//   const currentStatus = customerStatus.value;
+//   const newStatus = currentStatus === '0' ? '1' : '0';
+//
+//   try {
+//     await CustomerService.updateStatus(customerId, { status: newStatus });
+//     customerStatus.value = newStatus; // Update local state
+//     alert(`Customer status updated to ${newStatus === '0' ? 'Under Review' : 'Approved'}`);
+//   } catch (error) {
+//     console.error("Error updating customer status:", error);
+//     alert("Failed to update customer status.");
+//   }
+// };
+</script>
 <style scoped>
 /* Tailwind CSS is used directly in the template; no additional CSS needed */
 </style>
