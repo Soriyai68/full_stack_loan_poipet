@@ -1,10 +1,12 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const db = {};
 
 db.mongoose = mongoose;
- db.user = require("./user.model");
+db.url = process.env.MONGO_URL;
+db.user = require("./user.model");
 db.role = require("./role.model");
 db.loans = require("./loan.model.js")(mongoose);
 db.customers = require("./customer.model.js")(mongoose);
