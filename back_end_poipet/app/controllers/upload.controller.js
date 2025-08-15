@@ -4,7 +4,7 @@ const { MongoClient, GridFSBucket } = require("mongodb");
 const mongoUrl = process.env.MONGO_URL;
 const dbName = process.env.DB_NAME;
 const bucketName = process.env.IMG_BUCKET || "photos";
-const baseUrl = "http://localhost:8080/api/files/";
+const baseUrl = "https://backend-loan-express.onrender.com/api/files/";
 
 const mongoClient = new MongoClient(mongoUrl);
 
