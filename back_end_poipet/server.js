@@ -4,16 +4,15 @@ const cors = require("cors");
 
 const app = express();
 
-var corsOptions = {
-  origin: "https://frontendloan.vercel.app",
+// var corsOptions = {
+//   origin: "https://frontendloan.vercel.app",
+// };
 
-};
-
-// var corsOptions = [
-//   "http://localhost:8081",
-//   "frontendloan-git-main-soriya11s-projects.vercel.app",
-//   "frontendloan-pvnpazbd8-soriya11s-projects.vercel.app"
-// ]
+const corsOptions = [
+  "http://localhost:8081",
+  "http://frontendloan-git-main-soriya11s-projects.vercel.app",
+  "http://frontendloan-pvnpazbd8-soriya11s-projects.vercel.app"
+]
 
 app.use(cors(corsOptions));
 
