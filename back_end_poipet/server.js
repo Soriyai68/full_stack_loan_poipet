@@ -4,9 +4,17 @@ const cors = require("cors");
 
 const app = express();
 
-var corsOptions = {
-  origin: "http://localhost:8081",
-};
+// var corsOptions = {
+//   origin: "http://localhost:8081",
+
+// };
+
+var corsOptions = [
+  "http://localhost:8081",
+  "https://frontend-loan-express.onrender.com",
+  "frontendloan-git-main-soriya11s-projects.vercel.app",
+  "frontendloan-pvnpazbd8-soriya11s-projects.vercel.app"
+]
 
 app.use(cors(corsOptions));
 
